@@ -1,0 +1,111 @@
+.main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero {
+    background-color: #f8fafc;
+    padding: var(--spacing-2xl) 0;
+    text-align: center;
+}
+
+.heroContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.heroTitle {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.heroAccent {
+    color: var(--color-secondary);
+    font-style: italic;
+}
+
+.heroText {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+}
+
+.heroButtons {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.sectionTitle {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    font-size: 2.5rem;
+}
+
+.categoryCard {
+    position: relative;
+    height: 400px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    group: hover;
+}
+
+.categoryImage {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s;
+}
+
+.categoryCard:hover .categoryImage {
+    transform: scale(1.05);
+}
+
+.categoryContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-xl);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+}
+
+.categoryContent h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.linkArrow {
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-top: var(--spacing-sm);
+    display: inline-block;
+}
+
+.tailoringSection {
+    background-color: #f1f5f9;
+    padding: var(--spacing-2xl) 0;
+    margin-top: var(--spacing-2xl);
+    text-align: center;
+}
+
+.tailoringContent {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tailoringContent h2 {
+    margin-bottom: var(--spacing-md);
+}
+
+.tailoringContent p {
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+}
