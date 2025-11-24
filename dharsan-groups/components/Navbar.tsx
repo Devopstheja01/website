@@ -1,13 +1,16 @@
 'use client';
 
 import Link from 'next/link';
+'use client';
+
+import Link from 'next/link';
 import { useState } from 'react';
 import styles from './Navbar.module.css';
 import { useCart } from '@/lib/CartContext';
 import AuthModal from './AuthModal';
 
 export default function Navbar() {
-    const { user, logout } = useCart();
+    const { user, login, logout } = useCart();
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
     return (
@@ -46,6 +49,10 @@ export default function Navbar() {
             <AuthModal
                 isOpen={isAuthModalOpen}
                 onClose={() => setIsAuthModalOpen(false)}
+                onLogin={(mobile) => {
+                    login(mobile);
+                    setIsAuthModalOpen(false);
+                }}
             />
         </nav>
     );
