@@ -7,27 +7,46 @@ interface CartItem extends Product {
     quantity: number;
 }
 
+interface User {
+    mobile: string;
+    isLoggedIn: boolean;
+}
+
 interface CartContextType {
     items: CartItem[];
     addToCart: (product: Product) => void;
     removeFromCart: (productId: string) => void;
     clearCart: () => void;
     total: number;
+    user: User | null;
+    login: (mobile: string) => void;
+    logout: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
+    const [user, setUser] = useState<User | null>(null);
 
     // Load from local storage on mount
     useEffect(() => {
-        const saved = localStorage.getItem('cart');
-        if (saved) {
+        const savedCart = localStorage.getItem('cart');
+        const savedUser = localStorage.getItem('user');
+
+        if (savedCart) {
             try {
-                setItems(JSON.parse(saved));
+                setItems(JSON.parse(savedCart));
             } catch (e) {
                 console.error('Failed to parse cart', e);
+            }
+        }
+
+        if (savedUser) {
+            try {
+                setUser(JSON.parse(savedUser));
+            } catch (e) {
+                console.error('Failed to parse user', e);
             }
         }
     }, []);
@@ -36,6 +55,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(items));
     }, [items]);
+
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('user');
+        }
+    }, [user]);
 
     const addToCart = (product: Product) => {
         setItems(current => {
@@ -57,10 +84,19 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     const clearCart = () => setItems([]);
 
+    const login = (mobile: string) => {
+        setUser({ mobile, isLoggedIn: true });
+    };
+
+    const logout = () => {
+        setUser(null);
+        clearCart(); // Optional: clear cart on logout
+    };
+
     const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
     return (
-        <CartContext.Provider value={{ items, addToCart, removeFromCart, clearCart, total }}>
+        <CartContext.Provider value={{ items, addToCart, removeFromCart, clearCart, total, user, login, logout }}>
             {children}
         </CartContext.Provider>
     );

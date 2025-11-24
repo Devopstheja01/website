@@ -1,88 +1,83 @@
-# DharsanGroups.com
+# DharsanGroups E-commerce Platform
 
-Premium e-commerce platform for custom tailoring and fashion. Built with Next.js, Vanilla CSS, and Docker.
+A premium e-commerce solution for DharsanGroups, featuring custom tailoring services, a dynamic product catalog, and an integrated admin portal.
 
 ## Features
-- **Premium Design**: Custom CSS variables for a luxury aesthetic.
-- **Shop**: Men's and Women's collections with filtering and search.
-- **Tailoring**: Appointment booking and partner registration.
-- **User Dashboard**: Order tracking and status updates.
-- **Admin Portal**: Product management interface.
-- **Mock Payment**: Simulated credit card checkout flow.
 
-## Prerequisites
-- [Git](https://git-scm.com/)
-- [Docker](https://www.docker.com/) & Docker Compose
+- **Premium UI/UX**: Modern, responsive design with smooth transitions and a focus on aesthetics.
+- **Product Catalog**: 
+    - Separate sections for Men and Women.
+    - Advanced filtering by sub-category (Shirts, Pants, Sarees, etc.) and price range.
+    - Pagination for large product lists.
+- **Shopping Cart**: 
+    - Real-time cart management.
+    - **User Authentication**: Users must log in (via mock mobile/OTP) to add items to the cart.
+- **Custom Tailoring**: 
+    - Appointment booking system.
+    - Choice between **Store Visit** (with Google Maps integration) and **Home Visit** (with address collection).
+- **Integrated Admin Portal**:
+    - Secure login with Mock Captcha and OTP.
+    - Dashboard for managing orders and inventory (mock).
+    - Accessible at `/admin/login`.
+- **Mock Payment Gateway**: Simulated payment flow for testing.
 
-## 🚀 Quick Start (Local)
+## Tech Stack
 
-1.  **Clone the repository**
-    ```bash
-    git clone <your-repo-url>
-    cd dharsan-groups
-    ```
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: CSS Modules (Vanilla CSS)
+- **State Management**: React Context (CartContext, AdminContext)
+- **Deployment**: Docker (Single Container)
 
-2.  **Run with Docker** (Recommended)
-    ```bash
-    docker-compose up --build
-    ```
-    The app will be available at `http://localhost:3000`.
+## Getting Started
 
-3.  **Run manually** (Requires Node.js 18+)
-    ```bash
-    npm install
-    npm run dev
-    ```
+### Prerequisites
 
-## ☁️ Cloud Deployment Guide (Oracle Linux 9 / RHEL)
+- Node.js 18+ (for local development)
+- Docker (for containerized deployment)
 
-To deploy this on an Oracle Linux 9 (OL9) or RHEL instance using **Podman**:
+### Local Development
 
-### Step 1: Prepare your Cloud Instance
-1.  SSH into your cloud server.
-2.  Install Podman, Podman Compose, and Git:
-    ```bash
-    sudo dnf update -y
-    sudo dnf install -y podman podman-compose git
-    ```
-3.  Enable the Podman socket (optional, but good for some tools):
-    ```bash
-    sudo systemctl enable --now podman.socket
-    ```
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-### Step 2: Configure Firewall
-Oracle Linux 9 uses `firewalld` by default. You need to allow traffic on port 3000.
-```bash
-sudo firewall-cmd --permanent --add-port=3000/tcp
-sudo firewall-cmd --reload
-```
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-### Step 3: Deploy the Code
-1.  Clone your repository on the server:
-    ```bash
-    git clone <your-repo-url>
-    cd dharsan-groups
-    ```
-2.  Start the application using Podman Compose:
-    ```bash
-    # Podman Compose works similarly to Docker Compose
-    podman-compose up -d --build
-    ```
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Step 4: Access the Site
-- Open your browser and visit `http://<your-server-ip>:3000`.
+### Docker Deployment (OL9 Compatible)
 
+This application is designed to run in a single container, making it fully compatible with Oracle Linux 9 (OL9) cloud instances.
 
+1. Build the image:
+   ```bash
+   docker build -t dharsan-groups .
+   ```
 
-
-## 🛠️ Environment Variables
-Currently, the app uses mock data. For production with a real database, update `docker-compose.yml` or create a `.env` file with:
-```env
-DATABASE_URL=postgresql://user:password@host:5432/db_name
-```
+2. Run the container:
+   ```bash
+   docker run -p 3000:3000 dharsan-groups
+   ```
 
 ## Project Structure
-- `/app`: Next.js App Router pages.
-- `/components`: Reusable UI components.
-- `/lib`: Mock data and utility functions.
-- `/public`: Static assets.
+
+- `app/`: Next.js App Router pages and layouts.
+    - `shop/`: Product listing pages.
+    - `cart/`: Shopping cart page.
+    - `tailoring/`: Appointment booking page.
+    - `admin/`: Admin portal (Login & Dashboard).
+- `components/`: Reusable UI components (Navbar, Footer, FilterSidebar, AuthModal).
+- `lib/`: Utility functions and Context providers (data.ts, CartContext.tsx, AdminContext.tsx).
+- `public/`: Static assets.
+
+## Authentication (Mock)
+
+- **User Login**: Enter any mobile number -> OTP is `1234`.
+- **Admin Login**: 
+    - Username: `admin`
+    - Mobile: Any valid number
+    - OTP: `1234`
