@@ -16,6 +16,7 @@ A premium e-commerce solution for DharsanGroups, featuring custom tailoring serv
     - Appointment booking system.
     - Choice between **Store Visit** (with Google Maps integration) and **Home Visit** (with address collection).
 - **Integrated Admin Portal**:
+    - **No separate container required**: The admin portal is built directly into the main application.
     - Secure login with Mock Captcha and OTP.
     - Dashboard for managing orders and inventory (mock).
     - Accessible at `/admin/login`.
@@ -49,19 +50,42 @@ A premium e-commerce solution for DharsanGroups, featuring custom tailoring serv
 
 3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Docker Deployment (OL9 Compatible)
+### Cloud Deployment (Oracle Linux 9 with Podman)
 
-This application is designed to run in a single container, making it fully compatible with Oracle Linux 9 (OL9) cloud instances.
+This application is optimized for Oracle Linux 9 (OL9) using **Podman**.
 
-1. Build the image:
+#### 1. Prerequisites
+Ensure Podman and Git are installed on your OL9 instance:
+```bash
+sudo dnf install -y podman git
+```
+
+#### 2. Firewall Configuration
+Allow traffic on port 3000:
+```bash
+sudo firewall-cmd --permanent --add-port=3000/tcp
+sudo firewall-cmd --reload
+```
+
+#### 3. Build & Run with Podman
+
+1. **Build the image**:
    ```bash
-   docker build -t dharsan-groups .
+   podman build -t dharsan-groups .
    ```
 
-2. Run the container:
+2. **Run the container**:
    ```bash
-   docker run -p 3000:3000 dharsan-groups
+   podman run -d -p 3000:3000 --name dharsan-app dharsan-groups
    ```
+
+3. **Verify Deployment**:
+   Access the application at `http://<YOUR_SERVER_IP>:3000`.
+
+#### 4. Managing the App
+- View logs: `podman logs -f dharsan-app`
+- Stop app: `podman stop dharsan-app`
+- Remove app: `podman rm dharsan-app`
 
 ## Project Structure
 
