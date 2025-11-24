@@ -34,33 +34,46 @@ Premium e-commerce platform for custom tailoring and fashion. Built with Next.js
     npm run dev
     ```
 
-## ☁️ Cloud Deployment Guide
+## ☁️ Cloud Deployment Guide (Oracle Linux 9 / RHEL)
 
-To deploy this on a cloud instance (AWS EC2, DigitalOcean Droplet, Google Compute Engine, etc.):
+To deploy this on an Oracle Linux 9 (OL9) or RHEL instance using **Podman**:
 
 ### Step 1: Prepare your Cloud Instance
 1.  SSH into your cloud server.
-2.  Install Docker and Git:
+2.  Install Podman, Podman Compose, and Git:
     ```bash
-    # Ubuntu/Debian example
-    sudo apt-get update
-    sudo apt-get install docker.io docker-compose git -y
+    sudo dnf update -y
+    sudo dnf install -y podman podman-compose git
+    ```
+3.  Enable the Podman socket (optional, but good for some tools):
+    ```bash
+    sudo systemctl enable --now podman.socket
     ```
 
-### Step 2: Deploy the Code
+### Step 2: Configure Firewall
+Oracle Linux 9 uses `firewalld` by default. You need to allow traffic on port 3000.
+```bash
+sudo firewall-cmd --permanent --add-port=3000/tcp
+sudo firewall-cmd --reload
+```
+
+### Step 3: Deploy the Code
 1.  Clone your repository on the server:
     ```bash
     git clone <your-repo-url>
     cd dharsan-groups
     ```
-2.  Start the application in detached mode (background):
+2.  Start the application using Podman Compose:
     ```bash
-    sudo docker-compose up -d --build
+    # Podman Compose works similarly to Docker Compose
+    podman-compose up -d --build
     ```
 
-### Step 3: Access the Site
+### Step 4: Access the Site
 - Open your browser and visit `http://<your-server-ip>:3000`.
-- **Note**: Ensure your firewall/security group allows traffic on port **3000**.
+
+
+
 
 ## 🛠️ Environment Variables
 Currently, the app uses mock data. For production with a real database, update `docker-compose.yml` or create a `.env` file with:
