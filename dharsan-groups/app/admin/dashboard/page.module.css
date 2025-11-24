@@ -2,7 +2,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #f8fafc;
+    background-color: var(--color-surface);
 }
 
 .dashboard {
@@ -17,81 +17,106 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .header h1 {
-    font-size: 1.8rem;
-    color: #1e293b;
+    font-size: 2rem;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
 }
 
 .logoutBtn {
+    background: white;
+    color: #ef4444;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #ef4444;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.logoutBtn:hover {
     background: #ef4444;
     color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    gap: 2rem;
+    margin-bottom: 4rem;
 }
 
 .card {
     background: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .card h2 {
-    font-size: 1rem;
-    color: #64748b;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: var(--font-primary);
 }
 
 .stat {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 0.25rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
 }
 
 .card p {
     font-size: 0.875rem;
-    color: #94a3b8;
+    color: var(--color-text-muted);
 }
 
 .section h2 {
-    font-size: 1.25rem;
-    color: #1e293b;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-heading);
 }
 
 .actions {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
 }
 
 .actionBtn {
     background: white;
-    border: 1px solid #e2e8f0;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 500;
-    color: #334155;
+    border: 1px solid var(--color-border);
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    color: var(--color-primary);
     cursor: pointer;
     transition: all 0.2s;
+    min-width: 200px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
 }
 
 .actionBtn:hover {
-    border-color: #000;
-    color: #000;
-    transform: translateY(-1px);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }

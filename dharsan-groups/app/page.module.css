@@ -5,52 +5,83 @@
 }
 
 .hero {
-    background-color: #f8fafc;
-    padding: var(--spacing-2xl) 0;
+    background-color: var(--color-surface);
+    padding: 6rem 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-primary));
 }
 
 .heroContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-lg);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .heroTitle {
     font-size: 3.5rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
 }
 
 .heroAccent {
-    color: var(--color-secondary);
+    color: var(--color-accent);
     font-style: italic;
 }
 
 .heroText {
     font-size: 1.25rem;
     color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
     max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .heroButtons {
     display: flex;
-    gap: var(--spacing-md);
+    gap: 1rem;
+    justify-content: center;
 }
 
 .sectionTitle {
     text-align: center;
-    margin-bottom: var(--spacing-xl);
     font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--color-primary);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.sectionTitle::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-accent);
+    margin: 1rem auto 0;
 }
 
 .categoryCard {
     position: relative;
-    height: 400px;
     border-radius: var(--radius-lg);
     overflow: hidden;
+    aspect-ratio: 4/3;
     group: hover;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
 }
 
 .categoryImage {
@@ -58,7 +89,7 @@
     height: 100%;
     background-size: cover;
     background-position: center;
-    transition: transform 0.5s;
+    transition: transform 0.5s ease;
 }
 
 .categoryCard:hover .categoryImage {
@@ -70,42 +101,65 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: var(--spacing-xl);
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
     color: white;
 }
 
 .categoryContent h3 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
     color: white;
-    font-size: 1.5rem;
-    margin-bottom: var(--spacing-xs);
+}
+
+.categoryContent p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
 }
 
 .linkArrow {
     color: var(--color-accent);
     font-weight: 600;
-    margin-top: var(--spacing-sm);
-    display: inline-block;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.2s;
+}
+
+.categoryCard:hover .linkArrow {
+    gap: 0.75rem;
 }
 
 .tailoringSection {
-    background-color: #f1f5f9;
-    padding: var(--spacing-2xl) 0;
-    margin-top: var(--spacing-2xl);
+    background-color: var(--color-primary);
+    color: white;
+    padding: 5rem 0;
     text-align: center;
-}
-
-.tailoringContent {
-    max-width: 800px;
-    margin: 0 auto;
+    margin-top: 4rem;
 }
 
 .tailoringContent h2 {
-    margin-bottom: var(--spacing-md);
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .tailoringContent p {
-    margin-bottom: var(--spacing-lg);
-    color: var(--color-text-muted);
-    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: 2.5rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
 }
