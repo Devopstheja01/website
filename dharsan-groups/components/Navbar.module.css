@@ -38,25 +38,6 @@
     color: var(--color-accent);
 }
 
-.links {
-    display: flex;
-    gap: 2.5rem;
-}
-
-.link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.link:hover {
-    color: var(--color-accent);
-}
-
 .actions {
     display: flex;
     align-items: center;
